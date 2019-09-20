@@ -1,0 +1,40 @@
+﻿
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using MbmStore.Models;
+@{
+    ViewData["Title"] = "Customers";
+}
+
+
+
+<h1>Customers</h1>
+<a asp-controller="Home" asp-action="Index">< Home</a>
+
+
+<h2>Customers' details</h2>
+@foreach (Invoice invoice in @ViewBag.Invoices)
+{
+    <div class="customer">
+        <h2>@invoice.Customer.FirstName @invoice.Customer.LastName</h2>
+        <p>@invoice.Customer.Address<br />@invoice.Customer.Zip - @invoice.Customer.City</p>
+        <br />
+    </div>
+}
+
+<h2>Phone numbers</h2>
+@foreach (Invoice invoice in @ViewBag.Invoices)
+{
+    <p>
+        @invoice.Customer.FirstName @invoice.Customer.LastName (phone nrs: @string.Join(", ", @invoice.Customer.PhoneNumbers)) is @invoice.Customer.Age years old.
+    </p>
+}
+
+
+
+<style>
+    body {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto
+    }
+</style>
