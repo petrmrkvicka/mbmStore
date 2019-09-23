@@ -31,15 +31,15 @@ namespace MbmStore.Models
 
         public TimeSpan PlayingTime
         {
-            get; set; // Can't make it read-only!!!!
-            /*{
-                foreach(Track track in Tracks)
+            get
+            {
+                TimeSpan totalTime = new TimeSpan();
+                foreach (Track tr in Tracks)
                 {
-                    PlayingTime.Add(track.Length);
-                    Console.WriteLine(PlayingTime);
+                    totalTime += tr.Length;
                 }
-                return PlayingTime;
-            }*/
+                return totalTime;
+            }
         } 
         
 
@@ -61,8 +61,8 @@ namespace MbmStore.Models
                 Composers = string.Join(", ", composer)
             };
             Tracks.Add(track);
-            PlayingTime = PlayingTime + length;
-            Console.WriteLine("this");
+            //PlayingTime = PlayingTime + length;
+            //Console.WriteLine("this");
         }
 
 

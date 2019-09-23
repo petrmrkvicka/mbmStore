@@ -9,7 +9,6 @@ namespace MbmStore.Models
     {
         // fields
        
-
         // properties
         public string Director
         {
@@ -21,14 +20,11 @@ namespace MbmStore.Models
             get; set;
         }
 
-
         // constructors
         public Movie(string title, decimal price) : base(title, price)
         {
             Title = title;
             Price = price;
         }
-
-
     }
 }

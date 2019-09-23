@@ -8,26 +8,15 @@ namespace MbmStore.Models
     public static class Repository
     {
         // fields
-
         // properties
         public static List<Product> Products = new List<Product>();
         public static List<Invoice> Invoices = new List<Invoice>();
 
-
-
-
-
-
-
         // constructors
         static Repository(){
-
-
-
             ////////
             // Books
             ////////
-
             Book b1 = new Book("Steve Turner", "A hard day's write", 150M, 2005)
             {
                 Publisher = "It Books",
@@ -44,13 +33,9 @@ namespace MbmStore.Models
             };
             Products.Add(b2);
 
-
-
-
             ////////
             // Music CDs
             ////////
-
             MusicCD cd1 = new MusicCD("The Beatles", "Abbey Road (Remastered)", 128M, 2009)
             {
                 Label = "EMI",
@@ -96,13 +81,9 @@ namespace MbmStore.Models
             cd2.AddTrack("Tomorrow Never Knows", new List<string>() { }, new TimeSpan(0, 3, 01));
             Products.Add(cd2);
 
-
-
-
             ////////
             // Movies
             ////////
-           
             Movie jungleBook = new Movie("Jungle Book", 160.50m)
             {
                 ImageUrl = "junglebook.jpg",
@@ -124,14 +105,10 @@ namespace MbmStore.Models
             };
             Products.Add(it2);
 
-
-
-
             ////////
             // Invoices
             ////////
             // Customers
-
             Customer cust1 = new Customer(0, "Petr", "Mrkvicka", "Vestervang 10", "8000", "Aarhus C");
             cust1.AddPhoneNumber("91887697");
             cust1.AddPhoneNumber("74882938");
@@ -145,9 +122,7 @@ namespace MbmStore.Models
             cust3.AddPhoneNumber("74939393");
             cust3.BirthDate = new DateTime(1997, 11, 26);
 
-
             // Invoices
-
             Invoice inv1 = new Invoice(0, new DateTime(2019, 09, 04), cust1);
             inv1.AddOrderItem(cd2, 2);
             Invoices.Add(inv1);
@@ -162,13 +137,6 @@ namespace MbmStore.Models
             inv3.AddOrderItem(cd1, 1);
             inv3.AddOrderItem(b1, 2);
             Invoices.Add(inv3);
-
-
-
-
         }
-
-
-
     }
 }
