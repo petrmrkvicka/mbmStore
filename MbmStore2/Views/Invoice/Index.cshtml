@@ -8,11 +8,19 @@
 
 <h1>Invoices</h1>
 <a asp-controller="Home" asp-action="Index">< Home</a>
+<form method="post" asp-controller="Invoice" asp-action="Index">
+    <div>
+        <select name="customer" id="customer" asp-items="@ViewData["Customers"] as List<SelectListItem>"></select>
+        <button type="submit">Show invoices</button>
+        <a asp-controller="Invoice" asp-action="Index"><button type="button">Show all invoices</button></a>
+    </div>
+</form>
+
 
 <div class="card">
     <div class="row">
         <p><b>Customer</b></p>
-        <p><b>Product</b></p>
+        <p><b>Product<span class="unitQ">Quantity</span><span class="priceOne">Price per unit</span></b></p>
         <p><b>Price</b></p>
     </div>
         @foreach (Invoice invoice in ViewBag.Invoices)
@@ -21,15 +29,24 @@
             <div class="row">
                 <p>@invoice.Customer.FirstName @invoice.Customer.LastName</p>
                 <p>@foreach (OrderItem product in invoice.OrderItems) {
-                    <span>@product.Product.Title</span>
+                    <span>@product.Product.Title
+                        <span class="unitQ">@product.Quantity
+                            @{if (product.Quantity == 1) {
+                                    @Html.Raw("unit")
+                                } else {
+                                    @Html.Raw("units")
+                                }
+                             }</span>
+                        <span class="priceOne">@String.Format("{0:0.00} kr/unit", product.Product.Price)</span>
+                    </span>
                 }</p>
                 <p>@foreach (OrderItem product in invoice.OrderItems) {
-                    <span>@String.Format("{0:0.00}", product.Product.Price)</span>
-                    price += product.Product.Price;
+                    <span>@String.Format("{0:0.00} kr", product.Product.Price * product.Quantity)</span>
+                    price += product.Product.Price * product.Quantity;
                 }</p>
                 <p></p>
                 <p><b>Total:</b></p>
-                <p><b>@String.Format("{0:0.00}", price)</b></p>
+                <p><b>@String.Format("{0:0.00} kr", price)</b></p>
             </div>
         }
 </div>
@@ -52,7 +69,7 @@
     .row {
         display: flex;
         flex-wrap: wrap;
-        padding: 1em 4em
+        padding: 1em 3em
     }
 
     .row p {
@@ -64,19 +81,30 @@
     }
 
     .row p:nth-child(3n + 1) {
-        width: 20%
+        width: 16%
     }
 
     .row p:nth-child(3n + 2) {
-        width: 60%
+        width: 74%
     }
 
     .row p:nth-child(3 + 3) {
-        width: 20%
+        width: 8%
     }
 
     .row p span {
         margin: 0 0 0.2em;
         display: block
+    }
+
+    .unitQ, .priceOne {
+        float: right;
+        padding-right: 1em;
+        width: 120px
+    }
+
+    form {
+        margin-bottom: 1em;
+        float: right
     }
 </style>

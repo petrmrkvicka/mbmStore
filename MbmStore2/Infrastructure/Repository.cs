@@ -137,6 +137,11 @@ namespace MbmStore.Models
             inv3.AddOrderItem(cd1, 1);
             inv3.AddOrderItem(b1, 2);
             Invoices.Add(inv3);
+
+            Invoice inv4 = new Invoice(0, new DateTime(2019, 09, 27), cust1);
+            inv4.AddOrderItem(jungleBook, 21);
+            inv4.AddOrderItem(b2, 1);
+            Invoices.Add(inv4);
         }
     }
 }
