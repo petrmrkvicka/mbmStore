@@ -47,8 +47,6 @@ namespace MbmStore.Models
         public MusicCD(string artist, string title, decimal price, short released) : base(title, price)
         {
             Artist = artist;
-            Title = title;
-            Price = price;
             Released = released;
         }
 

@@ -41,8 +41,6 @@ namespace MbmStore.Models
         public Book(string author, string title, decimal price, short published) : base(title, price)
         {
             Author = author;
-            Title = title;
-            Price = price;
             Published = published;
         }
     }

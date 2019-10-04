@@ -34,7 +34,12 @@ namespace MbmStore.Models
 
         public decimal TotalPrice
         {
-            get;
+            get
+            {
+                totalPrice = Product.Price * Quantity;
+
+                return totalPrice;
+            }
         }
 
 

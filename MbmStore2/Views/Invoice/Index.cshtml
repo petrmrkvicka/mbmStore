@@ -25,7 +25,6 @@
     </div>
         @foreach (Invoice invoice in ViewBag.Invoices)
         {
-            decimal price = 0M;
             <div class="row">
                 <p>@invoice.Customer.FirstName @invoice.Customer.LastName</p>
                 <p>@foreach (OrderItem product in invoice.OrderItems) {
@@ -41,12 +40,11 @@
                     </span>
                 }</p>
                 <p>@foreach (OrderItem product in invoice.OrderItems) {
-                    <span>@String.Format("{0:0.00} kr", product.Product.Price * product.Quantity)</span>
-                    price += product.Product.Price * product.Quantity;
+                    <span>@String.Format("{0:0.00} kr", product.TotalPrice)</span>
                 }</p>
                 <p></p>
                 <p><b>Total:</b></p>
-                <p><b>@String.Format("{0:0.00} kr", price)</b></p>
+                <p><b>@String.Format("{0:0.00} kr", invoice.TotalPrice)</b></p>
             </div>
         }
 </div>

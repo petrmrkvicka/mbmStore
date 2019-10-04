@@ -24,7 +24,15 @@ namespace MbmStore.Models
 
         public decimal TotalPrice
         {
-            get; 
+            get
+            {
+                foreach (OrderItem item in OrderItems)
+                {
+                    totalPrice += item.Product.Price * item.Quantity;
+                }
+
+                return totalPrice;
+            } 
         }
 
         public Customer Customer

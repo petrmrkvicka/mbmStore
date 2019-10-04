@@ -23,8 +23,6 @@ namespace MbmStore.Models
         // constructors
         public Movie(string title, decimal price) : base(title, price)
         {
-            Title = title;
-            Price = price;
         }
     }
 }
