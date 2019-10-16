@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MbmStore.Models
+namespace MbmStore2.Models
 {
     public class MusicCD : Product
     {
@@ -44,7 +44,7 @@ namespace MbmStore.Models
         
 
         // constructors
-        public MusicCD(string artist, string title, decimal price, short released) : base(title, price)
+        public MusicCD(int productId, string artist, string title, decimal price, short released) : base(productId, title, price)
         {
             Artist = artist;
             Released = released;

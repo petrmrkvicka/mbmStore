@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MbmStore2.Models;
 
-namespace MbmStore.Models
+namespace MbmStore2.Infrastructure
 {
     public static class Repository
     {
@@ -17,29 +16,32 @@ namespace MbmStore.Models
             ////////
             // Books
             ////////
-            Book b1 = new Book("Steve Turner", "A hard day's write", 150M, 2005)
+            Book b1 = new Book(7, "Steve Turner", "A hard day's write", 150M, 2005)
             {
                 Publisher = "It Books",
                 ISBN = "9781858680330",
-                ImageUrl = "a-hard-days-write.jpg"
+                ImageUrl = "a-hard-days-write.jpg",
+                Category = "Book"
             };
             Products.Add(b1);
 
-            Book b2 = new Book("William Pearson", "With a Little Help from My Friends: The Making of Sgt. Pepper", 1800, 1995)
+            Book b2 = new Book(6, "William Pearson", "With a Little Help from My Friends: The Making of Sgt. Pepper", 1800, 1995)
             {
                 Publisher = "Little Brown & Co",
                 ISBN = "978-0316547833",
-                ImageUrl = "little-help.jpg"
+                ImageUrl = "little-help.jpg",
+                Category = "Book"
             };
             Products.Add(b2);
 
             ////////
             // Music CDs
             ////////
-            MusicCD cd1 = new MusicCD("The Beatles", "Abbey Road (Remastered)", 128M, 2009)
+            MusicCD cd1 = new MusicCD(5, "The Beatles", "Abbey Road (Remastered)", 128M, 2009)
             {
                 Label = "EMI",
-                ImageUrl = "abbey-road.jpg"
+                ImageUrl = "abbey-road.jpg",
+                Category = "Music"
             };
             cd1.AddTrack("Come Together", new List<string>() { "" }, new TimeSpan(0, 0, 0));
             cd1.AddTrack("Something", new List<string>() { "" }, new TimeSpan(0, 0, 0));
@@ -60,10 +62,11 @@ namespace MbmStore.Models
             cd1.AddTrack("Her Majesty", new List<string>() { "" }, new TimeSpan(0, 0, 0));
             Products.Add(cd1);
 
-            MusicCD cd2 = new MusicCD("The Beatles", "Revolver (Remastered)", 128M, 2009)
+            MusicCD cd2 = new MusicCD(4, "The Beatles", "Revolver (Remastered)", 128M, 2009)
             {
                 Label = "EMI",
-                ImageUrl = "revolver.jpg"
+                ImageUrl = "revolver.jpg",
+                Category = "Music"
             };
             cd2.AddTrack("Taxman", new List<string>() { "Harrisson" }, new TimeSpan(0, 2, 28));
             cd2.AddTrack("Eleanor Rigby", new List<string>() { "Lennon", "McCartney" }, new TimeSpan(0, 2, 6));
@@ -84,24 +87,27 @@ namespace MbmStore.Models
             ////////
             // Movies
             ////////
-            Movie jungleBook = new Movie("Jungle Book", 160.50m)
+            Movie jungleBook = new Movie(1,"Jungle Book", 160.50m)
             {
                 ImageUrl = "junglebook.jpg",
-                Director = "Jon Favreau"
+                Director = "Jon Favreau",
+                Category = "Movie"
             };
             Products.Add(jungleBook);
 
-            Movie johnWick3 = new Movie("John Wick 3", 75m)
+            Movie johnWick3 = new Movie(2,"John Wick 3", 75m)
             {
                 ImageUrl = "jw.jpg",
-                Director = "Chad Stahelski"
+                Director = "Chad Stahelski",
+                Category = "Movie"
             };
             Products.Add(johnWick3);
 
-            Movie it2 = new Movie("It 2", 60m)
+            Movie it2 = new Movie(3, "It 2", 60m)
             {
                 ImageUrl = "it.jpg",
-                Director = "Andrés Muschietti"
+                Director = "Andrés Muschietti",
+                Category = "Movie"
             };
             Products.Add(it2);
 

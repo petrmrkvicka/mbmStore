@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MbmStore.Models;
+using MbmStore2.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MbmStore.Controllers
+namespace MbmStore2.Controllers
 {
     public class MovieController : Controller
     {

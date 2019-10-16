@@ -1,175 +1,51 @@
-﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@using MbmStore.Models;
-@model Invoice;
+﻿@model ProductsListViewModel
+@using MbmStore2.Infrastructure;
 @{
     ViewData["Title"] = "Catalogue";
-
-
 }
-
 
 
 <h1>Catalogue</h1>
 
-<a asp-controller="Home" asp-action="Index">< Home</a>
-
-<div class="catalogue">
-    <div class="books">
+@if (Model.Products.OfType<Book>().ToList().Count > 0)
+{
+    <div class="products" style="clear:both">
         <h2>Books</h2>
-        @foreach(Product product in @ViewBag.Products) {
-            @if(product is Book) {
-                Book book = (Book)product;
-                <div class="book card">
-                    <p>
-                        <b>Title:</b> @book.Title<br />
-                        <b>Author:</b> @book.Author<br />
-                        <b>Price:</b> @book.Price<br />
-                        <b>Publisher:</b> @book.Publisher (@book.Published)<br />
-                        <b>ISBN:</b> @book.ISBN<br />
-                        <img src="/Images/Books/@book.ImageUrl" alt="@book.Title" />
-                </div>
-            }
-
+        @foreach (Book book in Model.Products.OfType<Book>().ToList())
+        {
+            @await Html.PartialAsync("_ProductSummaryBook", book)
         }
     </div>
+}
 
-
-    <div class="albums">
+@if (Model.Products.OfType<MusicCD>().ToList().Count > 0)
+{
+    <div class="products" style="clear:both">
         <h2>Music CDs</h2>
-        @foreach(Product product in @ViewBag.Products) {
-            @if(product is MusicCD) {
-                MusicCD album = (MusicCD)product;
-                <div class="album card">
-                    <p>
-                        <b>Album:</b> @album.Title<br />
-                        <b>Artist:</b> @album.Artist<br />
-                        <b>Price:</b> @album.Price<br />
-                        <b>Publisher:</b> @album.Label (@album.Released)<br />
-                        <img src="/Images/Albums/@album.ImageUrl" alt="@album.Title" />
-                    </p>
-                    <div>
-                        <h3>List of tracks</h3>
-                        <ol>
-                            @if(album.Tracks != null){
-                                @foreach (var song in album.Tracks)
-                                {
-                                    <li>@song.Title <span>@(@song.Composers == "" ? "" : "(" + @song.Composers + ")") @(@song.Length > new TimeSpan(0, 0, 0) ? @song.Length.ToString(@"mm\:ss") : "") </span></li>
-                                }
-                            }
-                        </ol>
-                        <br />
-                        @if (album.Tracks != null)
-                        {
-                            @if (album.PlayingTime == new TimeSpan(0,0,0)) {
-                                <p><b>Total play time:</b> not defined</p>
-                            } else {
-                                <b>Total play time:</b> @album.PlayingTime
-                            }
-                        }
-                    </div>
-                </div>
-            }
+        @foreach (MusicCD album in Model.Products.OfType<MusicCD>().ToList())
+        {
+            @await Html.PartialAsync("_ProductSummaryMusicCD", album)
         }
     </div>
+}
 
-
-    <div class="movies">
+@if (Model.Products.OfType<Movie>().ToList().Count > 0)
+{
+    <div class="products" style="clear:both">
         <h2>Movies</h2>
-        @foreach(Product product in @ViewBag.Products) {
-            @if(product is Movie) {
-                Movie movie = (Movie)product;
-                <div class="movie card">
-                    <p>
-                        <p><b>Title:</b> @movie.Title</p>
-                        <p><b>Price:</b> @String.Format("{0:0.00}", movie.Price)</p>
-                        <p><b>Director:</b> @movie.Director</p>
-                        <img src="/Images/@movie.ImageUrl" alt="@movie.Title" />
-                </div>
-            }
-
+        @foreach (Movie movie in Model.Products.OfType<Movie>().ToList())
+        {
+            @await Html.PartialAsync("_ProductSummaryMovie", movie)
         }
     </div>
+}
 
+<div page-model="@Model.PagingInfo"
+     page-action="Index"
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-secondary"
+     page-class-selected="btn-primary"
+     page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1">
 </div>
-
-<style>
-    body {
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto
-    }
-
-    .catalogue {
-        display: flex;
-        justify-content: space-between;
-        margin: 3em auto;
-        background: whitesmoke;
-        position: relative;
-        padding: 0 1em 3em
-    }
-
-    .catalogue::before,
-    .catalogue::after {
-        content:"";
-        display: block;
-        position: absolute;
-        width: calc( 50vw - 600px );
-        background: whitesmoke;
-        transform: translateX(calc(-100% - 1em));
-        height: 100%;
-        z-index: 0;
-    }
-
-    .catalogue::after {
-        right: 0;
-        transform: translateX(calc(100%));
-    }
-
-    .card {
-        border-radius: 5px;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
-        padding: 1em;
-        z-index: 99999;
-        background: white
-    }
-
-    .books,
-    .movies {
-        flex-basis: 31%;
-        width: 31%
-    }
-
-    .albums {
-        flex-basis: 31%;
-        width: 31%;
-        max-width: 400px;
-    }
-
-    .album {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column
-    }
-
-    .book,
-    .album,
-    .movie {
-        margin-top: 2em
-    }
-
-
-
-    .album li span {
-        color: grey;
-    }
-
-    p, ol {
-        margin: 0 0
-    }
-
-    img {
-        width: 100%;
-        margin: 1em 0 0
-    }
-</style>
-

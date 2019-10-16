@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MbmStore.Controllers
+namespace MbmStore2.Controllers
 {
     public class HomeController : Controller
     {

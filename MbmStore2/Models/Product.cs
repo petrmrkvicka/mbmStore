@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MbmStore.Models
+namespace MbmStore2.Models
 {
     public class Product
     {
@@ -11,25 +11,15 @@ namespace MbmStore.Models
 
 
         // properties
-        public int ProductId
-        {
-            get; set;
-        }
+        public int ProductId { get; set; }
 
-        public string Title
-        {
-            get; set;
-        }
+        public string Title { get; set; }
 
-        public decimal Price
-        {
-            get; set;
-        }
+        public decimal Price { get; set; }
 
-        public string ImageUrl
-        {
-            get; set;
-        }
+        public string ImageUrl { get; set; }
+
+        public string Category { get; set; }
 
 
 
@@ -40,8 +30,9 @@ namespace MbmStore.Models
         public Product(){}
 
 
-        public Product(string title, decimal price)
+        public Product(int productId, string title, decimal price)
         {
+            ProductId = productId;
             Price = price;
             Title = title;
         }

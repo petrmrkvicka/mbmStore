@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MbmStore.Models
+namespace MbmStore2.Models
 {
     public class Book : Product
     {
@@ -38,7 +38,7 @@ namespace MbmStore.Models
         // constructors
 
 
-        public Book(string author, string title, decimal price, short published) : base(title, price)
+        public Book(int productId, string author, string title, decimal price, short published) : base(productId, title, price)
         {
             Author = author;
             Published = published;

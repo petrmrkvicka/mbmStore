@@ -10,6 +10,11 @@
     <Folder Include="Views\Catalogue\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Views\Invoice\" />
+    <Folder Include="Components\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\NavigationMenu\" />
+    <Folder Include="Views\Shared\Components\CartSummary\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +23,12 @@
       <PrivateAssets>all</PrivateAssets>
       <Publish>true</Publish>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-  </ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />  </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Remove="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
 </Project>

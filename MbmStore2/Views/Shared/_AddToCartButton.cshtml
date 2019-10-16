@@ -1,0 +1,21 @@
+﻿
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model MbmStore2.Models.Product
+@using MbmStore2.Infrastructure
+<div class="col-md-6">
+    <form id="@Model.ProductId" asp-action="AddToCart" asp-controller="Cart" method="post">
+        <input type="hidden" name="ProductID" value="@Model.ProductId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <div class="card-text p-1" style="float:right; display: flex; justify-content: flex-end; flex-direction: column">
+            <div>
+                <label for="quantity-@Model.ProductId">Qty: </label>
+                <input class="form-control" type="number" name="quantity" min="1" value="1" max="10" size="3" style="width:100px" id="quantity-@Model.ProductId"/>
+
+            </div>
+
+            <button type="submit" class="btn btn-success btn-sm" style="margin-top: 0.5rem">
+                Add To Cart
+            </button>
+        </div>
+    </form>
+</div>

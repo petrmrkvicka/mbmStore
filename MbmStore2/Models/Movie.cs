@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MbmStore.Models
+namespace MbmStore2.Models
 {
     public class Movie : Product
     {
@@ -21,7 +21,7 @@ namespace MbmStore.Models
         }
 
         // constructors
-        public Movie(string title, decimal price) : base(title, price)
+        public Movie(int productId, string title, decimal price) : base(productId, title, price)
         {
         }
     }

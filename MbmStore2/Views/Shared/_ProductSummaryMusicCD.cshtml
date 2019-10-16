@@ -1,0 +1,32 @@
+﻿@model MbmStore2.Models.MusicCD
+@using MbmStore2.Models
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="/Images/Albums/@Model.ImageUrl" alt="@Model.Title" style="width:100px" />
+    </div>
+    <div class="col-md-4">
+        <strong>Title:</strong> @Model.Title<br />
+        <strong>Author:</strong> @Model.Artist<br />
+        <strong>Price:</strong> @Model.Price<br />
+        <strong>Publisher:</strong> @Model.Label (@Model.Released)<br />
+        <ol>
+                            @if(Model.Tracks != null){
+                                @foreach (var song in Model.Tracks)
+                                {
+                                    <li>@song.Title <span>@(@song.Composers == "" ? "" : "(" + @song.Composers + ")") @(@song.Length > new TimeSpan(0, 0, 0) ? @song.Length.ToString(@"mm\:ss") : "") </span></li>
+                                }
+                            }
+                        </ol>
+                        <br />
+                        @if (Model.Tracks != null)
+                        {
+                            @if (Model.PlayingTime == new TimeSpan(0,0,0)) {
+                                <p><b>Total play time:</b> not defined</p>
+                            } else {
+                                <b>Total play time:</b> @Model.PlayingTime
+                            }
+                        }
+</div>
+    @await Html.PartialAsync("_AddToCartButton", (Product) Model)
+</div>

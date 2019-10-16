@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MbmStore2.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,11 @@ namespace MbmStore2
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,7 +32,53 @@ namespace MbmStore2
                 app.UseStatusCodePages();
             }
 
+            app.UseSession();
             app.UseStaticFiles();
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                    name: null,
+                    template: "Catalogue/{category}/Page{page:int}",
+                    defaults: new
+                    {
+                        controller = "Catalogue",
+                        action = "Index"
+                    }
+                );
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{page:int}",
+                    defaults: new
+                    {
+                        controller = "Catalogue",
+                        action = "Index",
+                        productPage = 1
+                    }
+                 );
+                routes.MapRoute(
+                    name: null,
+                    template: "Catalogue/{category}",
+                    defaults: new
+                    {
+                        controller = "Catalogue",
+                        action = "Index",
+                        productPage = 1
+                    });
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new
+                    {
+                       controller = "Catalogue",
+                       action = "Index",
+                       productPage = 1
+                    }
+                );
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Catalogue}/{action=Index}/{id?}"
+                );
+            });
+
             app.UseMvcWithDefaultRoute();
         }
     }
